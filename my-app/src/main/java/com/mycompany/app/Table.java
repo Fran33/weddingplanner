@@ -2,7 +2,14 @@ package com.mycompany.app;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Comparator;
 
+class AscendingTableSize implements Comparator<Table>
+{
+    public int compare(Table t1, Table t2){
+    	return t2.size - t1.size;
+    }
+}
 public class Table
 {
 	public String name;

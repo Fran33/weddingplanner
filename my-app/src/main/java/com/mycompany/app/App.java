@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.io.File;
+import java.util.Collections;
 
 public class App 
 {
@@ -15,7 +16,9 @@ public class App
 		
 		App app = new App();
 
-		app.parseFile("testData1.txt",tables, groups);
+		app.parseFile(args[0],tables, groups);
+		Collections.sort(tables, new AscendingTableSize());
+		Collections.sort(groups, new AscendingGroupSize());
 		app.assignGroupsToTables(tables, groups);
 		app.print(tables);
     }
@@ -51,7 +54,6 @@ public class App
 					token = token.trim();
 					String[] tokens = token.split(" ");
 					for(int i=0;i<tokens.length;i++){
-						System.out.println(tokens[i]);
 						String[] pairs = tokens[i].split("-");
 						String tableName = pairs[0].trim();
 						String tableSize = pairs[1].trim();

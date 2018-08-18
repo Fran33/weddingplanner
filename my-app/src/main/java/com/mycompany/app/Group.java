@@ -2,7 +2,14 @@ package com.mycompany.app;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Comparator;
 
+class AscendingGroupSize implements Comparator<Group>
+{
+    public int compare(Group g1, Group g2){
+    	return g2.size - g1.size;
+    }
+}
 public class Group
 {
     public String name;
