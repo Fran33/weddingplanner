@@ -43,10 +43,11 @@ public class AppTest
 		groups.add(g2);
 		
 		App app = new App();
-		app.assignGroupsToTables(tables, groups);
+		Boolean success = app.assignGroupsToTables(tables, groups);
 
-		assertEquals(0,tables.get(0).remainingSize);
-		assertEquals(2,tables.get(1).remainingSize);
+		assertTrue(success);
+		assertEquals(0,tables.get(0).getRemainingSize());
+		assertEquals(2,tables.get(1).getRemainingSize());
 		app.print(tables);
 	}
     /**
@@ -65,12 +66,11 @@ public class AppTest
 		groups.add(g2);
 		
 		App app = new App();
-		app.assignGroupsToTables(tables, groups);
+		Boolean success = app.assignGroupsToTables(tables, groups);
 
-		assertEquals(0,tables.get(0).remainingSize);
-		assertEquals(",Howser",tables.get(0).groupNamesCsv);
-		assertEquals(0,tables.get(1).remainingSize);
-		assertEquals(",Thornton",tables.get(1).groupNamesCsv);
+		assertTrue(success);
+		assertEquals(0,tables.get(0).getRemainingSize());
+		assertEquals(0,tables.get(1).getRemainingSize());
 		app.print(tables);
 	}
     /**
@@ -87,10 +87,11 @@ public class AppTest
 		groups.add(new Group("Smith",1,"Thornton"));
 
 		App app = new App();
-		app.assignGroupsToTables(tables, groups);
+		Boolean success = app.assignGroupsToTables(tables, groups);
 
-		assertEquals(1,tables.get(0).remainingSize);
-		assertEquals(1,tables.get(1).remainingSize);
+		assertTrue(success);
+		assertEquals(1,tables.get(0).getRemainingSize());
+		assertEquals(1,tables.get(1).getRemainingSize());
 		app.print(tables);
 	}
     /**
@@ -107,10 +108,11 @@ public class AppTest
 		groups.add(new Group("Smith",1,""));
 
 		App app = new App();
-		app.assignGroupsToTables(tables, groups);
+		Boolean success = app.assignGroupsToTables(tables, groups);
 
-		assertEquals(1,tables.get(0).remainingSize);
-		assertEquals(1,tables.get(1).remainingSize);
+		assertTrue(success);
+		assertEquals(1,tables.get(0).getRemainingSize());
+		assertEquals(1,tables.get(1).getRemainingSize());
 		app.print(tables);
 	}
     /**
@@ -127,10 +129,11 @@ public class AppTest
 		groups.add(new Group("Smith",1,"Thornton"));
 
 		App app = new App();
-		app.assignGroupsToTables(tables, groups);
+		Boolean success = app.assignGroupsToTables(tables, groups);
 
-		assertEquals(1,tables.get(0).remainingSize);
-		assertEquals(1,tables.get(1).remainingSize);
+		assertTrue(success);
+		assertEquals(1,tables.get(0).getRemainingSize());
+		assertEquals(1,tables.get(1).getRemainingSize());
 		app.print(tables);
 	}
 }

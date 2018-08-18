@@ -12,3 +12,5 @@ my-app/target/surefire-reports/TEST-com.mycompany.app.TableTest.xml
 *.md~
 *.jar
 *.txt~
+my-app/target/surefire-reports/TEST-com.mycompany.app.GroupTest.xml
+my-app/target/surefire-reports/com.mycompany.app.GroupTest.txt

@@ -7,7 +7,6 @@ import java.util.Scanner;
 import java.io.File;
 import java.util.Collections;
 
-import org.apache.log4j.*;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -25,12 +24,14 @@ public class App
 		FileReader reader = new FileReader();
 
 		reader.parseFile(args[0],tables, groups);
-		Collections.sort(tables, new AscendingTableSize());
-		Collections.sort(groups, new AscendingGroupSize());
-		app.assignGroupsToTables(tables, groups);
-		app.print(tables);
+		Collections.sort(tables, new DescendingTableSizeSort());
+		Collections.sort(groups, new DescendingGroupSizeSort());
+		boolean success = app.assignGroupsToTables(tables, groups);
+		if(success){
+			app.print(tables);
+		}
     }
-    public void assignGroupsToTables(List<Table> tables, List<Group> groups){
+    public boolean assignGroupsToTables(List<Table> tables, List<Group> groups){
 		Iterator<Group> groupIter = groups.iterator();
 		while(groupIter.hasNext()){
 			Group g = groupIter.next();
@@ -39,7 +40,7 @@ public class App
 			Table dislikeChoice = null;
 			while(tableIter.hasNext() && !seated){
 				Table t = tableIter.next();
-				if(t.canAddWithinSize(g)){
+				if(t.hasSeatsFor(g)){
 					if(g.happyTogether(t)){
 						t.addGroup(g);
 						seated = true;
@@ -54,10 +55,16 @@ public class App
 				}
 			}
 			if(!seated && dislikeChoice != null){
+				logger.debug(g.getName() + " dislikes table groups " + dislikeChoice + " but better than nothing.");
 				dislikeChoice.addGroup(g);
 				seated = true;
-			}				
+			}
+			if(!seated){
+				logger.error("There is no apparent seating arrangement that will work with table sizes and group preferences.");
+				return false;
+			}
 		}
+		return true;
 	}    	
     public void print(List<Table> tables){
 		for(Table t : tables){

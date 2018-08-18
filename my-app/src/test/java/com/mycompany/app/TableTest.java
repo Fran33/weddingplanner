@@ -28,15 +28,45 @@ public class TableTest
     }
 
     /**
-     * Fundamental Behavior 1: add group changes table size;
+     * Fundamental Behavior 1: verifies space
      * Test that when a group is added to a table, the table remainingSize is reduced.
      */
-    public void testAddGroupChangesSize() // move this to TableTest
+    public void testTableHasSpace()
+    {
+        Table t = new Table("A",2);
+        Group g = new Group("Adams",2,"");
+        boolean result = t.hasSeatsFor(g);
+        assertTrue(result);
+        assertEquals(2,t.getSize());
+    }
+    public void testTableHasNoSpace()
+    {
+        Table t = new Table("A",0);
+        Group g = new Group("Adams",1,"");
+        boolean result = t.hasSeatsFor(g);
+        assertFalse(result);
+        assertEquals(0,t.getSize());
+    }
+    public void testTableLacksSpace()
+    {
+        Table t = new Table("A",2);
+        Group g = new Group("Adams",3,"");
+        boolean result = t.hasSeatsFor(g);
+        assertFalse(result);
+        assertEquals(2,t.getSize());
+    }
+
+    /**
+     * Fundamental Behavior 2: add group changes table size;
+     * Test that when a group is added to a table, the table remainingSize is reduced.
+     */
+    public void testAddGroupChangesTableSize()
     {
         Table t = new Table("A",2);
         Group g = new Group("Adams",1,"");
         t.addGroup(g);
-        assertEquals(2,t.size);
-        assertEquals(1,t.remainingSize);
+        assertEquals(2,t.getSize());
+        assertEquals(1,t.getRemainingSize());
     }
+
 }
