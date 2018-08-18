@@ -1,6 +1,6 @@
 # weddingplanner
 
-java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App testData1.txt -Dlog4j.configuration=file:log4j.properties
+java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App testData1.txt
 
 
 The goal of Wedding Planner is to arrange each group of guests at a table such that 
