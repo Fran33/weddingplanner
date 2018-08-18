@@ -22,13 +22,23 @@ public class App
 		
 		App app = new App();
 		FileReader reader = new FileReader();
+		if(args.length == 0){
+			logger.error("Input file required");
+			return;
+		}
 
-		reader.parseFile(args[0],tables, groups);
-		Collections.sort(tables, new DescendingTableSizeSort());
-		Collections.sort(groups, new DescendingGroupSizeSort());
-		boolean success = app.assignGroupsToTables(tables, groups);
-		if(success){
-			app.print(tables);
+		if(reader.parseFile(args[0],tables, groups)){
+			Collections.sort(tables, new DescendingTableSizeSort());
+			Collections.sort(groups, new DescendingGroupSizeSort());
+			boolean success = app.assignGroupsToTables(tables, groups);
+			if(success){
+				Collections.sort(tables, new AscendingTableNameSort());
+				app.print(tables);
+			} else {
+				logger.error("Failed to assign groups to tables");
+			}
+		} else {
+			logger.error("Failed to parse file " + args[0]);
 		}
     }
     public boolean assignGroupsToTables(List<Table> tables, List<Group> groups){
@@ -68,7 +78,7 @@ public class App
 	}    	
     public void print(List<Table> tables){
 		for(Table t : tables){
-			t.display();
+			System.out.println(t.display());
 		}
     }
 }

@@ -20,6 +20,9 @@ public class Group
     public String getDislikes() {
     	return this.dislikesCsv;
     }
+    public String display(){
+		return name + ", party of " + size;
+    }
     public Group(String name, int size, String dislikesCsv){
     	this.name = name;
     	this.size = size;

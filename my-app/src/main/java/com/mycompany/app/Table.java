@@ -30,14 +30,13 @@ public class Table
     	this.size = size;
     	this.remainingSize = size;
     }
-    public void display(){
+    public String display(){
     	int totalSize = 0;
-    	String resultLine = "table " + this.name + " " + this.size + "=";
+    	String resultLine = "Table " + this.name + "\n";
     	for(Group group : groups){
-    		resultLine += group.getName() + "," + group.getSize()+"; ";
-    		totalSize += group.getSize();
+    		resultLine += group.display() + "\n";
     	}
-    	logger.info(resultLine);
+    	return resultLine;
     }
     public void addGroup(Group group){
 		this.groups.add(group);
