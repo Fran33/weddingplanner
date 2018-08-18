@@ -7,3 +7,7 @@ my-app/target/surefire-reports/com.mycompany.app.AppTest.txt
 my-app/target/surefire-reports/com.mycompany.app.TableTest.txt
 my-app/target/surefire-reports/TEST-com.mycompany.app.AppTest.xml
 my-app/target/surefire-reports/TEST-com.mycompany.app.TableTest.xml
+*.xml~
+*.marks
+*.md~
+*.jar

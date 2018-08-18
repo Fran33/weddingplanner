@@ -2,14 +2,26 @@ package com.mycompany.app;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Comparator;
 
+import org.apache.log4j.Logger;
+
+class AscendingTableSize implements Comparator<Table>
+{
+    public int compare(Table t1, Table t2){
+    	return t2.size - t1.size;
+    }
+}
 public class Table
 {
+	final static Logger logger = Logger.getLogger(Table.class);
+	public String name;
     public int size;
     public int remainingSize;
     public List<Group> groups;
     public String groupNamesCsv;
-    public Table(int size) {
+    public Table(String name, int size) {
+    	this.name = name;
     	this.groups = new ArrayList<Group>();
     	this.size = size;
     	this.remainingSize = size;
@@ -17,12 +29,12 @@ public class Table
     }
     public void display(){
     	int totalSize = 0;
-		System.out.print(this.size + "=");
+    	String resultLine = "table " + this.name + " " + this.size + "=";
     	for(Group g : groups){
-    		System.out.print(g.name + "," + g.size+";");
+    		resultLine += g.name + "," + g.size+"; ";
     		totalSize += g.size;
     	}
-    	System.out.println("");
+    	logger.info(resultLine);
     }
     public void addGroup(Group group){
 		this.groups.add(group);
@@ -30,13 +42,13 @@ public class Table
 		this.groupNamesCsv +=","+group.name;
     }
     public boolean canAddWithinSize(Group group){
-    	System.out.println("trying to add " + group.name + "," + group.size + " to table of remaining size " + this.remainingSize);
+    	logger.debug("trying to add " + group.name + "," + group.size + " to table of remaining size " + this.remainingSize);
     	int newSize = this.remainingSize - group.size;
     	if(newSize >= 0){
-    		System.out.println("can add with remaining size " + newSize);
+    		logger.debug("can add with remaining size " + newSize);
     		return true;
     	} else {
-    		System.out.println("cannot add, not enough room " + newSize);
+    		logger.debug("cannot add, not enough room " + newSize);
     		return false;
     	}
 	}

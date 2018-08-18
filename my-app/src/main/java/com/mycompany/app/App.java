@@ -3,35 +3,32 @@ package com.mycompany.app;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
+import java.io.File;
+import java.util.Collections;
 
-/**
- * Hello world!
- *
- */
+import org.apache.log4j.*;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 public class App 
 {
-    public static void main( String[] args )
+	final static Logger logger = Logger.getLogger(App.class);
+
+	public static void main( String[] args )
     {
+    	PropertyConfigurator.configure("log4j.properties");  
         List<Table> tables = new ArrayList<Table>();
-		tables.add(new Table(4));
-		tables.add(new Table(5));
-		tables.add(new Table(6));
         List<Group> groups = new ArrayList<Group>();
-		groups.add(new Group("Thornton",2,"Smith"));
-		groups.add(new Group("Smith",2,""));
-		groups.add(new Group("Howser",3,"Smith"));
-		groups.add(new Group("Jones",4,""));
-		groups.add(new Group("Kidd",3,""));
-		groups.add(new Group("Swanson",1,"Howser"));
 		
 		App app = new App();
-		app.assignGroupsToTables(tables, groups);
+		FileReader reader = new FileReader();
 
-    }
-    public void print(List<Table> tables){
-		for(Table t : tables){
-			t.display();
-		}
+		reader.parseFile(args[0],tables, groups);
+		Collections.sort(tables, new AscendingTableSize());
+		Collections.sort(groups, new AscendingGroupSize());
+		app.assignGroupsToTables(tables, groups);
+		app.print(tables);
     }
     public void assignGroupsToTables(List<Table> tables, List<Group> groups){
 		Iterator<Group> groupIter = groups.iterator();
@@ -50,4 +47,9 @@ public class App
 			}
 		}
 	}    	
+    public void print(List<Table> tables){
+		for(Table t : tables){
+			t.display();
+		}
+    }
 }

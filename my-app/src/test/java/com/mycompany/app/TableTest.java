@@ -33,7 +33,7 @@ public class TableTest
      */
     public void testAddGroupChangesSize() // move this to TableTest
     {
-        Table t = new Table(2);
+        Table t = new Table("A",2);
         Group g = new Group("Adams",1,"");
         t.addGroup(g);
         assertEquals(2,t.size);
