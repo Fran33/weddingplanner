@@ -11,3 +11,4 @@ my-app/target/surefire-reports/TEST-com.mycompany.app.TableTest.xml
 *.marks
 *.md~
 *.jar
+*.txt~

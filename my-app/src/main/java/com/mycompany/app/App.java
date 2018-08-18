@@ -36,15 +36,27 @@ public class App
 			Group g = groupIter.next();
 			boolean seated = false;
 			Iterator<Table> tableIter = tables.iterator();
+			Table dislikeChoice = null;
 			while(tableIter.hasNext() && !seated){
 				Table t = tableIter.next();
-				if(t.canAddWithinSize(g) && g.happyTogether(t)){
-					t.addGroup(g);
-					seated = true;
+				if(t.canAddWithinSize(g)){
+					if(g.happyTogether(t)){
+						t.addGroup(g);
+						seated = true;
+					} else {
+						// size fits but dislike this choice, save for later
+						if(dislikeChoice == null){
+							dislikeChoice = t;
+						}
+					}
 				} else {
 					// try next table
 				}
 			}
+			if(!seated && dislikeChoice != null){
+				dislikeChoice.addGroup(g);
+				seated = true;
+			}				
 		}
 	}    	
     public void print(List<Table> tables){
