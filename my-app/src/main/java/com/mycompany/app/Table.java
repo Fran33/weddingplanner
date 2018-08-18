@@ -5,11 +5,13 @@ import java.util.ArrayList;
 
 public class Table
 {
+	public String name;
     public int size;
     public int remainingSize;
     public List<Group> groups;
     public String groupNamesCsv;
-    public Table(int size) {
+    public Table(String name, int size) {
+    	this.name = name;
     	this.groups = new ArrayList<Group>();
     	this.size = size;
     	this.remainingSize = size;
@@ -17,7 +19,7 @@ public class Table
     }
     public void display(){
     	int totalSize = 0;
-		System.out.print(this.size + "=");
+		System.out.print("table " + this.name + " " + this.size + "=");
     	for(Group g : groups){
     		System.out.print(g.name + "," + g.size+";");
     		totalSize += g.size;

@@ -34,8 +34,8 @@ public class AppTest
     public void testAddBothToSameTable()
     {
 		List<Table> tables = new ArrayList<Table>();
-		tables.add(new Table(2));
-		tables.add(new Table(2));
+		tables.add(new Table("A",2));
+		tables.add(new Table("B",2));
         List<Group> groups = new ArrayList<Group>();
         Group g1 = new Group("Davidson",1,"");
 		groups.add(g1);
@@ -56,8 +56,8 @@ public class AppTest
     public void testAddGroupToSpaciousTable()
     {
 		List<Table> tables = new ArrayList<Table>();
-		tables.add(new Table(1));
-		tables.add(new Table(2));
+		tables.add(new Table("A",1));
+		tables.add(new Table("B",2));
         List<Group> groups = new ArrayList<Group>();
         Group g1 = new Group("Thornton",2,"");
 		groups.add(g1);
@@ -80,8 +80,8 @@ public class AppTest
     public void testAddBothToSameTableDislike()
     {
 		List<Table> tables = new ArrayList<Table>();
-		tables.add(new Table(2));
-		tables.add(new Table(2));
+		tables.add(new Table("A",2));
+		tables.add(new Table("B",2));
         List<Group> groups = new ArrayList<Group>();
 		groups.add(new Group("Thornton",1,"Smith"));
 		groups.add(new Group("Smith",1,"Thornton"));
@@ -100,8 +100,8 @@ public class AppTest
     public void testAddBothToSameTableDislike1()
     {
 		List<Table> tables = new ArrayList<Table>();
-		tables.add(new Table(2));
-		tables.add(new Table(2));
+		tables.add(new Table("A",2));
+		tables.add(new Table("B",2));
         List<Group> groups = new ArrayList<Group>();
 		groups.add(new Group("Thornton",1,"Smith"));
 		groups.add(new Group("Smith",1,""));
@@ -120,8 +120,8 @@ public class AppTest
     public void testAddBothToSameTableDislike2()
     {
 		List<Table> tables = new ArrayList<Table>();
-		tables.add(new Table(2));
-		tables.add(new Table(2));
+		tables.add(new Table("A",2));
+		tables.add(new Table("B",2));
         List<Group> groups = new ArrayList<Group>();
 		groups.add(new Group("Thornton",1,""));
 		groups.add(new Group("Smith",1,"Thornton"));
