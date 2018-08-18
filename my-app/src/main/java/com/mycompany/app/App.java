@@ -7,10 +7,17 @@ import java.util.Scanner;
 import java.io.File;
 import java.util.Collections;
 
+import org.apache.log4j.*;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 public class App 
 {
-    public static void main( String[] args )
+	final static Logger logger = Logger.getLogger(App.class);
+
+	public static void main( String[] args )
     {
+    	PropertyConfigurator.configure("log4j.properties");  
         List<Table> tables = new ArrayList<Table>();
         List<Group> groups = new ArrayList<Group>();
 		
@@ -41,9 +48,9 @@ public class App
     	try{
 			Scanner scanner = new Scanner(new File(filename));
 			scanner.useDelimiter("\\n");
-			int ntoken = 0;
 			while (scanner.hasNext()) {
 				String token = scanner.next();
+				logger.debug(token);
 				token = token.trim();
 				token = token.replace(",","");
 				token = token.replace(":","");
@@ -57,7 +64,7 @@ public class App
 						String[] pairs = tokens[i].split("-");
 						String tableName = pairs[0].trim();
 						String tableSize = pairs[1].trim();
-						System.out.println("table " + tableName + " size " + tableSize);
+						logger.info("table " + tableName + " size " + tableSize);
 						tables.add(new Table(tableName,Integer.parseInt(tableSize)));
 					}
 				} else if(token.indexOf("party of") >= 0){
@@ -70,15 +77,12 @@ public class App
 					String dislikes = "";
 					if(sizeLikeTokens.length > 1){
 						dislikes = sizeLikeTokens[1].trim();
-						System.out.println("group " + groupName + " size " + size + " dislikes " + dislikes);
+						logger.info("group " + groupName + " size " + size + " dislikes " + dislikes);
 					} else {
-						System.out.println("group " + groupName + " size " + size );
+						logger.info("group " + groupName + " size " + size );
 					}
 					groups.add(new Group(groupName,Integer.parseInt(size),dislikes));
 				}
-				
-				ntoken++;
-				System.out.printf("%3d) %s%n", ntoken, token);
 			}
     	}catch(Exception e){
     		e.printStackTrace();
