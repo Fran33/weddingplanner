@@ -15,21 +15,9 @@ public class FileReader
 {
 	final static Logger logger = Logger.getLogger(FileReader.class);
 
-    public void stageData(List<Table> tables, List<Group> groups){
-		tables.add(new Table("A",4));
-		tables.add(new Table("B",5));
-		tables.add(new Table("C",6));
-		groups.add(new Group("Thornton",2,"Smith"));
-		groups.add(new Group("Smith",2,""));
-		groups.add(new Group("Howser",3,"Smith"));
-		groups.add(new Group("Jones",4,""));
-		groups.add(new Group("Kidd",3,""));
-		groups.add(new Group("Swanson",1,"Howser"));
-    }    
-    public void parseFile(String filename, List<Table> tables, List<Group> groups){
+    public boolean parseFile(String filename, List<Table> tables, List<Group> groups){
     	if(filename == null){
-    		stageData(tables, groups);
-    		return;
+    		return false;
     	}
     	try{
 			Scanner scanner = new Scanner(new File(filename));
@@ -70,8 +58,10 @@ public class FileReader
 					groups.add(new Group(groupName,Integer.parseInt(size),dislikes));
 				}
 			}
+			return true;
     	}catch(Exception e){
     		e.printStackTrace();
+    		return false;
     	}
     }
 }
